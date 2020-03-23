@@ -1,0 +1,11 @@
+{
+    "name": "UNESCO Thesaurus Reconciliation Service",
+    "identifierSpace": "http://vocabularies.unesco.org/thesaurus/",
+    "schemaSpace": "http://vocabularies.unesco.org/browser/thesaurus/",
+    "defaultTypes": [
+        {
+            "id": "http://www.w3.org/2004/02/skos/core#Concept",
+            "name": "UNESCO Thesaurus concept search"
+        }
+    ]
+}
