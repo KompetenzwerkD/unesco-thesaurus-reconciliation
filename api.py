@@ -44,4 +44,4 @@ if __name__ == "__main__":
     app.add_url_rule("/", view_func=Manifest.as_view("manifest_view"))
     app.add_url_rule("/unesco", view_func=Query.as_view("query_view"))
 
-    app.run(debug=True )
+    app.run(host="0.0.0.0", debug=True)
