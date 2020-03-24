@@ -14,10 +14,19 @@ CORS(app)
 
 unesco = UnescoReconciliationService()
 
+
+def jsonpify(data):
+    if "callback" in request.args:
+        cb = request.args["callback"]
+        return "{}({})".format(cb, jsonify(data))
+    else:
+        return jsonpify(data)
+
+
 class Manifest(MethodView):
     def get(self):
         manifest = load_manifest(MANIFEST_FILE)
-        return make_response(jsonify(manifest))
+        return make_response(jsonpify(manifest))
 
 
 class Query(MethodView):
@@ -25,7 +34,7 @@ class Query(MethodView):
         query = request.args["query"]
         result = unesco.query(query)
 
-        return make_response(jsonify(result))
+        return make_response(jsonpify(result))
 
 
 if __name__ == "__main__":
