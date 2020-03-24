@@ -1,4 +1,4 @@
-# Reconciliation API for the UNESCO Thesaurus
+# Reconciliation Service for the UNESCO Thesaurus
 
 * [Reconciliation API Specification](https://reconciliation-api.github.io/specs/0.1/)
 * [List of Reconciliation API Endpionts](https://reconciliation-api.github.io/testbench/)
@@ -13,7 +13,7 @@ Python >= 3.7
 
 2. Install requirements
 
-3. Run flask server
+3. Run api.py
 
 ## License
 
