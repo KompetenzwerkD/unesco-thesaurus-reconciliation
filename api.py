@@ -18,15 +18,17 @@ unesco = UnescoReconciliationService()
 def jsonpify(data):
     if "callback" in request.args:
         cb = request.args["callback"]
-        return "{}({})".format(cb, jsonify(data))
+        response = make_response("{}({})".format(cb, jsonify(data)))
+        response.mimetype = "text/javascript"
+        return response
     else:
-        return jsonpify(data)
+        return make_response(jsonsify(data))
 
 
 class Manifest(MethodView):
     def get(self):
         manifest = load_manifest(MANIFEST_FILE)
-        return make_response(jsonpify(manifest))
+        return jsonpify(manifest)
 
 
 class Query(MethodView):
@@ -34,7 +36,7 @@ class Query(MethodView):
         query = request.args["query"]
         result = unesco.query(query)
 
-        return make_response(jsonpify(result))
+        return jsonpify(result)
 
 
 if __name__ == "__main__":
