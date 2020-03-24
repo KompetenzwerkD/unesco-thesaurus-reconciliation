@@ -1,7 +1,6 @@
 import json
 import importlib.resources as pkg_resources
 from jsonschema import validate
-
 from . import schema
 
 class SchemaValidator:
@@ -14,7 +13,7 @@ class SchemaValidator:
         with pkg_resources.open_text(schema, self.QUERY_BATCH_SCHEMA) as f:
             self.query_batch_schema = json.load(f)
         with pkg_resources.open_text(schema, self.RESULT_BATCH_SCHEMA) as f:
-            self.RESULT_BATCH_SCHEMA = json.load(f)            
+            self.result_batch_schema = json.load(f)            
 
     def validate_query_batch(self, query_batch):
         """
