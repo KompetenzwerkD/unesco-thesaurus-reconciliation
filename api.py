@@ -30,10 +30,24 @@ def jsonpify(data):
         return make_response(jsonify(data))
 
 
-class Manifest(MethodView):
-    def post(self):
+class Reconciliation(MethodView):
+    """
+    Reconciliation endpoint, processes a query batch if provided and returns a
+    reconciliation candidates batch, otherwhise returns the service manifest.
+    """
 
+    def _service_manifest(self):
+        print("no queries, respond with manifest")
+        manifest = load_manifest(MANIFEST_FILE)
+        return jsonpify(manifest)
+    
+    def get(self):
+        return self._service_manifest()
+
+    def post(self):
+        
         if "queries" in request.form:
+            # process query batch
             print("queries recieved")
             queries = json.loads(request.form["queries"])
             validator.validate_query_batch(queries)
@@ -42,15 +56,15 @@ class Manifest(MethodView):
             validator.validate_result_batch(results)
 
             return jsonpify(results)
-
+        
         else:
-            print("no queries, respond with manifest")
-            manifest = load_manifest(MANIFEST_FILE)
-            return jsonpify(manifest)
+            # return service manifest
+            return self._service_manifest()
+
 
 
 if __name__ == "__main__":
 
-    app.add_url_rule("/", view_func=Manifest.as_view("manifest_view"))
+    app.add_url_rule("/", view_func=Reconciliation.as_view("reconciliation"))
 
     app.run(host="0.0.0.0", debug=True)
