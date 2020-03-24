@@ -18,11 +18,11 @@ unesco = UnescoReconciliationService()
 def jsonpify(data):
     if "callback" in request.args:
         cb = request.args["callback"]
-        response = make_response("{}({})".format(cb, jsonify(data)))
+        response = make_response("{}({})".format(cb, json.dumps(data)))
         response.mimetype = "text/javascript"
         return response
     else:
-        return make_response(jsonsify(data))
+        return make_response(jsonify(data))
 
 
 class Manifest(MethodView):
