@@ -49,17 +49,8 @@ class Manifest(MethodView):
             return jsonpify(manifest)
 
 
-class Query(MethodView):
-    def get(self):
-        query = request.args["query"]
-        result = unesco.query(query)
-
-        return jsonpify(result)
-
-
 if __name__ == "__main__":
 
     app.add_url_rule("/", view_func=Manifest.as_view("manifest_view"))
-    app.add_url_rule("/reconsile", view_func=Query.as_view("query_view"))
 
     app.run(host="0.0.0.0", debug=True)
