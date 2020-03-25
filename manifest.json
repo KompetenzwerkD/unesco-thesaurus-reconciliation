@@ -7,5 +7,10 @@
             "id": "http://www.w3.org/2004/02/skos/core#Concept",
             "name": "UNESCO Thesaurus concept search"
         }
-    ]
+    ],
+    "preview": {
+        "height": 175,
+        "width": 450, 
+        "url": "http://127.0.0.1:5000/preview/{{id}}"
+    }
 }

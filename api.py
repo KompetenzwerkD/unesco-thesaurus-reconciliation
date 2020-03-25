@@ -62,9 +62,20 @@ class Reconciliation(MethodView):
             return self._service_manifest()
 
 
+class Preview(MethodView):
+    """
+    Endpoint for the preview service
+    """
+
+    def get(self, id_):
+        preview = unesco.preview(id_)
+        return make_response(preview)
+
+
 
 if __name__ == "__main__":
 
     app.add_url_rule("/", view_func=Reconciliation.as_view("reconciliation"))
+    app.add_url_rule("/preview/<string:id_>", view_func=Preview.as_view("preview"))
 
     app.run(host="0.0.0.0", debug=True)
